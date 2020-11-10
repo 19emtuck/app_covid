@@ -1,0 +1,11 @@
+html, body {
+ margin: 5px;
+ padding: 0;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+[v-cloak] > * { display:none }
+[v-cloak]::before { content: "loading…" }
