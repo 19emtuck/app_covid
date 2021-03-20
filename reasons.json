@@ -1,0 +1,26 @@
+{
+    "curfew": {
+        "animaux": "8. Animaux de compagnie\nD\u00e9placements brefs autour du domicile pour les besoins des animaux de compagnie [2]\u202f;",
+        "famille": "3. Motif familial imp\u00e9rieux, personnes vuln\u00e9rables ou pr\u00e9caires ou gardes d\u2019enfants\nD\u00e9placements pour motif familial imp\u00e9rieux, pour l\u2019assistance aux personnes vuln\u00e9rables ou pr\u00e9caires ou pour la garde d\u2019enfants\u202f;",
+        "handicap": "4. Situation de handicap\nD\u00e9placements des personnes en situation de handicap et de leur accompagnant\u202f;",
+        "judiciaire": "5. Convocation judiciaire ou administrative\nD\u00e9placements pour r\u00e9pondre \u00e0 une convocation judiciaire ou administrative, d\u00e9placements pour se rendre chez un professionnel du droit, pour un acte ou une d\u00e9marche qui ne peuvent \u00eatre r\u00e9alis\u00e9s \u00e0 distance\u202f;",
+        "missions": "6. Mission d\u2019int\u00e9r\u00eat g\u00e9n\u00e9ral\nD\u00e9placements pour participer \u00e0 des missions d\u2019int\u00e9r\u00eat g\u00e9n\u00e9ral sur demande de l\u2019autorit\u00e9 administrative\u202f;",
+        "sante": "2. Consultation et soins\nD\u00e9placements pour des consultations, examens, actes de pr\u00e9vention (dont vaccination) et soins ne pouvant \u00eatre assur\u00e9s \u00e0 distance ou pour l\u2019achat de produits de sant\u00e9\u202f;",
+        "transit": "7. D\u00e9placements de transit et longue distance\nD\u00e9placements li\u00e9s \u00e0 des transits ferroviaires, a\u00e9riens ou en bus pour des d\u00e9placements de longues distances\u202f;",
+        "travail": "1. Activit\u00e9 professionnelle, enseignement et formation\nD\u00e9placements entre le domicile et le lieu d\u2019exercice de l\u2019activit\u00e9 professionnelle ou le lieu d\u2019enseignement et de formation, d\u00e9placements professionnels ne pouvant \u00eatre diff\u00e9r\u00e9s\u202f;"
+    },
+    "quarantine": {
+        "animaux": "8. Animaux de compagnie\nD\u00e9placements brefs autour du domicile pour les besoins des animaux de compagnie [2]\u202f;",
+        "courses": "9. Achats\nD\u00e9placements pour effectuer des achats de fournitures n\u00e9cessaires \u00e0 l'activit\u00e9 professionnelle, des achats de premi\u00e8re n\u00e9cessit\u00e9, des retraits de commandes, des livraisons \u00e0 domicile, ainsi que pour les d\u00e9m\u00e9nagements\u202f;",
+        "demarche": "12. D\u00e9marches administratives ou juridiques\nD\u00e9placements pour se rendre dans un service public.",
+        "famille": "3. Motif familial imp\u00e9rieux, personnes vuln\u00e9rables ou pr\u00e9caires ou gardes d\u2019enfants\nD\u00e9placements pour motif familial imp\u00e9rieux, pour l\u2019assistance aux personnes vuln\u00e9rables ou pr\u00e9caires ou pour la garde d\u2019enfants\u202f;",
+        "handicap": "4. Situation de handicap\nD\u00e9placements des personnes en situation de handicap et de leur accompagnant\u202f;",
+        "judiciaire": "5. Convocation judiciaire ou administrative\nD\u00e9placements pour r\u00e9pondre \u00e0 une convocation judiciaire ou administrative, d\u00e9placements pour se rendre chez un professionnel du droit, pour un acte ou une d\u00e9marche qui ne peuvent \u00eatre r\u00e9alis\u00e9s \u00e0 distance\u202f;",
+        "missions": "6. Mission d\u2019int\u00e9r\u00eat g\u00e9n\u00e9ral\nD\u00e9placements pour participer \u00e0 des missions d\u2019int\u00e9r\u00eat g\u00e9n\u00e9ral sur demande de l\u2019autorit\u00e9 administrative\u202f;",
+        "rassemblement": "11. Participation \u00e0 des rassemblements autoris\u00e9s\nD\u00e9placements \u00e0 destination ou en provenance d'un lieu de culte, participation \u00e0 des rassemblements, r\u00e9unions ou activit\u00e9s sur la voie publique ou dans un lieu ouvert au public qui ne sont pas interdits en application de l'article 3\u202f;",
+        "sante": "2. Consultation et soins\nD\u00e9placements pour des consultations, examens, actes de pr\u00e9vention (dont vaccination) et soins ne pouvant \u00eatre assur\u00e9s \u00e0 distance ou pour l\u2019achat de produits de sant\u00e9\u202f;",
+        "sport": "10. Activit\u00e9s physiques\nD\u00e9placements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal de cinq kilom\u00e8tres autour du domicile, li\u00e9s soit \u00e0 l'activit\u00e9 physique individuelle des personnes, \u00e0 l'exclusion de toute pratique sportive collective et de toute proximit\u00e9 avec d'autres personnes, soit \u00e0 la promenade avec les seules personnes regroup\u00e9es dans un m\u00eame domicile [3]\u202f;",
+        "transit": "7. D\u00e9placements de transit et longue distance\nD\u00e9placements li\u00e9s \u00e0 des transits ferroviaires, a\u00e9riens ou en bus pour des d\u00e9placements de longues distances\u202f;",
+        "travail": "1. Activit\u00e9 professionnelle, enseignement et formation\nD\u00e9placements entre le domicile et le lieu d\u2019exercice de l\u2019activit\u00e9 professionnelle ou le lieu d\u2019enseignement et de formation, d\u00e9placements professionnels ne pouvant \u00eatre diff\u00e9r\u00e9s\u202f;"
+    }
+}

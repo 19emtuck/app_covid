@@ -2,7 +2,8 @@ const puppeteer = require('puppeteer');
 const fs        = require('fs');
 const { exec } = require('child_process');
 
-const root_url  = 'https://media.interieur.gouv.fr/deplacement-covid-19/';
+// const root_url  = 'https://media.interieur.gouv.fr/deplacement-covid-19/';
+const root_url  = 'https://media.interieur.gouv.fr/attestation-deplacement-derogatoire-covid-19/';
 // node puppeteer_covid.js --path=./ --nom="do" --prenom="jo" --date="11/06/2020" --lieu="Champigny" --addresse="13 rue
 // de la Pompe" --ville="Paris" --postal="75016" --datesortie="01/11/2020" --heuresortie="15:30" --postal=75016
 // --motif="achats"
@@ -25,6 +26,7 @@ let args = process.argv;
 args = args.splice(2).join(' ').replace('^--','').split(' --');
 
 args.forEach(function (val, index, array) {
+  if(/^-*type=/.test(val)){ type = val.split('=')[1].replace(/^"/,'').replace(/"$/,''); }
   if(/^-*nom=/.test(val)){ nom = val.split('=')[1].replace(/^"/,'').replace(/"$/,''); }
   if(/^-*prenom=/.test(val)){ prenom = val.split('=')[1].replace(/^"/,'').replace(/"$/,''); }
   if(/^-*date=/.test(val)){ date = val.split('=')[1].replace(/^"/,'').replace(/"$/,''); }
@@ -63,6 +65,18 @@ if(    nom !== null
       let invoice, node, lst_nodes, i;
 
       await page.goto(root_url);
+      await page.waitForSelector('button.curfew-button');
+      await page.waitForSelector('button.quarantine-button');
+
+      if(type==='curfew'){
+        await page.click('button.curfew-button');
+        await page.waitFor(800);
+      }
+      if(type==='quarantine'){
+        await page.click('button.quarantine-button');
+        await page.waitFor(800);
+      }
+
       await page.waitForSelector('input[name="firstname"]');
       await page.evaluate((prenom)=>{document.querySelector('input[name="firstname"]').value=prenom}, prenom);
       await page.waitForSelector('input[name="firstname"] ~ span.validity')
@@ -103,20 +117,20 @@ if(    nom !== null
       await page.evaluate((heure_sortie)=>{
                                  document.querySelector('input[name="heuresortie"]').value=heure_sortie;
                            }, heure_sortie);
-      await page.waitFor(100);
+      await page.waitFor(50);
       await page.waitForSelector('input[name="heuresortie"] ~ span.validity')
-      await page.waitFor(400);
+      await page.waitFor(50);
 
       await page.evaluate((motif)=>{document.querySelector('input[type="checkbox"][value="'+motif+'"]').scrollIntoView()}, motif);
-      await page.waitFor(200);
+      await page.waitFor(50);
 
       await page.click('input[type="checkbox"][value="'+motif+'"]');
       await page.waitForSelector('#generate-btn');
-      await page.waitFor(100);
+      await page.waitFor(50);
 
 
       await page.evaluate(()=>{document.querySelector('#generate-btn').scrollIntoView()});
-      await page.waitFor(300);
+      await page.waitFor(50);
 
       await page.click('#generate-btn');
       await page.waitFor(800);
@@ -193,4 +207,49 @@ if(    nom !== null
   if( motif == null){
     console.log('heure sortie cible manquant');
   }
+
+  (async () => {
+  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'], userDataDir:'/home/pi/dev/flask_covid/chrome_data', timeout:90000});
+
+  const page = await browser.newPage();
+  // page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+  
+  await page.setViewport({width:1600, height:900});
+  await page.setDefaultNavigationTimeout(90000);
+
+  await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36');
+
+  try {
+    let invoice, node, lst_nodes, i;
+
+    await page.goto(root_url);
+    await page.waitForSelector('input[type="checkbox"]');
+    await page.waitForSelector('button.curfew-button');
+    await page.waitForSelector('button.quarantine-button');
+
+    await page.click('button.curfew-button');
+    await page.waitFor(2000);
+    const curfew_labels_reasons = await page.evaluate(()=>{
+      return Object.fromEntries(Array.from(Array.from(document.querySelectorAll('div.fieldset-wrapper label[for]')).filter(e=>!!( e.offsetWidth || e.offsetHeight || e.getClientRects().length ))).map((e)=> [e.previousSibling.value, e.innerText.trim().replace(/;*/,'')]));
+    });
+
+    await page.click('button.quarantine-button');
+    await page.waitFor(2000);
+    const quarantine_labels_reasons = await page.evaluate(()=>{
+      return Object.fromEntries(Array.from(Array.from(document.querySelectorAll('div.fieldset-wrapper label[for]')).filter(e=>!!( e.offsetWidth || e.offsetHeight || e.getClientRects().length ))).map((e)=> [e.previousSibling.value, e.innerText.trim().replace(/;*/,'')]));
+    });
+
+    await fs.writeFile("reasons.json",
+      JSON.stringify({'curfew'     : curfew_labels_reasons,
+                      'quarantine' : quarantine_labels_reasons}), function(err) {
+          if(err) {
+              console.log(err);
+              return;
+          }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+    await browser.close();
+  })();
 }

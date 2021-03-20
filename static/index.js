@@ -201,16 +201,46 @@ var sha256 = function sha256(ascii) {
 
 var app = new Vue({
   el: '#app',
-  data: { input : '', user : '' , 'known':known, 'raisons':reasons },
+  data: { input          : '',
+          user           : '' ,
+          known          : known,
+          raisons        : reasons,
+          display_reason : null},
+  created: function(){
+    let current_url = window.location.href;
+    let urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('user')){
+      let user_label = urlParams.get('user')
+      this.input = user_label;
+      this.validateIt(user_label);
+    }
+  },
   delimiters: ['[[',']]'],
   methods : {
-    checkIt : function(e) {
-      var possible_value = removeDiacritics(e.target.value.toLowerCase());
-      if(window.known.indexOf(sha256(possible_value))!==-1) {
-        app.user = possible_value;
+    use_this_raison : function(raison){
+      if(raison==this.display_reason){
+        this.display_reason=null;
       } else {
-        app.user = '';
+        this.display_reason=raison;
       }
-    }
+    },
+    checkIt : function(e) {
+      var possible_value = removeDiacritics(this.input).toLowerCase();
+      this.validateIt(possible_value);
+    },
+    validateIt: function(label){
+      let current_url = new URL(location.pathname, location.href).href;
+      if(window.known.indexOf(sha256(label))!==-1) {
+        this.user = label;
+        let urlParams = new URLSearchParams(window.location.search);
+        if(!urlParams.has('user')){
+          urlParams.set('user',this.user)
+          history.pushState({}, document.title, current_url+'?'+urlParams.toString());
+        }
+      } else {
+        this.user = '';
+        history.pushState({}, document.title, current_url);
+      }
+    },
   }
 });

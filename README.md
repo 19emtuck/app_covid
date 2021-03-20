@@ -5,8 +5,8 @@ This is dedicated to self hosted person who want to automatize a bit.
 
 # test project
 
-- first create a users.json file in the same directoy with a bunch of user (usually family scope)
-you want them to access app
+First create a users.json file in the same directoy with a bunch of user (usually family scope)
+you want them to access app.
 
 
 ```json
@@ -24,6 +24,19 @@ you want them to access app
 ```
 
 ```console
+npm install qrcode
+npm install pdf-lib
+```
+
+
+```console
 export FLASK_APP=app_covid.py
 flask run -p 8080 -h 0.0.0.0 --reload
+```
+
+Launch puppeteer once to download last details.
+
+
+```console
+node node_covid.js
 ```
